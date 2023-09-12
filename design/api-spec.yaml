@@ -1,0 +1,179 @@
+openapi: 3.0.1
+info:
+  title: Emarket - Marketing HTTP API
+  description: The Marketing Service HTTP API
+  version: v1
+servers:
+  - url: /marketing-api
+paths:
+  /api/v1/campaigns:
+    get:
+      tags:
+        - Campaigns
+      operationId: "getCampaignList"            
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CampaignDTO'
+                nullable: true      
+    post:
+      tags:
+        - Campaigns
+      operationId: "postCampaign"
+      description: Create new campaign
+      requestBody:
+       content:
+         application/json:
+           schema:
+             $ref: '#/components/schemas/NewCampaignDTO'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignDTO'
+  /api/v1/campaigns/{id}:
+    get:
+      tags:
+        - Campaigns
+      operationId: "getCampaign"      
+      parameters: 
+        - name: id
+          in: path
+          description: Campaign ID
+          required: true
+          schema:
+            type: integer
+            format: int32      
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignDTO'
+        '404':
+          description: No campaign with the specified id
+    put:
+      tags:
+        - Campaigns
+      operationId: "putCampaign"
+      description: Update a campaign with the specified id
+      parameters: 
+        - name: id
+          in: path
+          description: Campaign ID
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCampaignDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignDTO'
+        '404':
+          description: No campaign with the specified id
+    delete:
+      tags:
+        - Campaigns
+      operationId: deleteCampaign
+      description: Delete a campaign with the specified id
+      parameters:
+        - name: id
+          in: path
+          description: Campaign ID
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: No campaign with the specified id
+components:
+  schemas:
+    CampaignDTO:
+      type: object
+      required: 
+        - id
+        - name
+        - description
+      properties:
+        id:
+          description: Campaign ID
+          type: integer
+          format: int32
+          example: 100
+        name:
+          description: Campaign name
+          type: string
+          example: 'Campaign 2022'
+        description:
+          description: Campaign description
+          type: string
+          example: 'New Sale Campaign in 2022'
+        From:
+          description: Campaign start date/time
+          type: string
+          format: date-time
+          example: '2022-05-18T05:01:43+09:00'
+        to:
+          description: Campaign end date/time
+          type: string
+          format: date-time
+          example: '2022-06-17T05:01:43+09:00'
+        pictureUri: 
+          description: Campaign banner image URL
+          type: string
+          example: '/images/banner-2.png'
+        detailsUri:
+          description: Campaign detail image URL
+          type: string
+          example: '/images/detail-2.png'
+    NewCampaignDTO:
+      type: object
+      required:
+        - name
+        - description
+      properties:
+        name:
+          description: Campaign name
+          type: string
+          example: 'Campaign 2022'
+        description:
+          description: Campaign description
+          type: string
+          example: 'Brand New Campaign in 2022'
+        From:
+          description: Campaign start date/time
+          type: string
+          format: date-time
+          example: '2022-05-18T05:01:43+09:00'
+        to:
+          description: Campaign end date/time
+          type: string
+          format: date-time
+          example: '2022-06-17T05:01:43+09:00'
+        pictureUri:
+          description: Campaign banner image URL
+          type: string
+          example: '/images/banner1.png'
+        detailsUri:
+          description: Campaign detail image URL
+          type: string  
+          example: '/images/detail1.png'

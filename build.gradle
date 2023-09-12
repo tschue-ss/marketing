@@ -1,0 +1,77 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "org.openapi.generator" version "5.3.0"
+	id "com.diffplug.eclipse.apt" version "3.26.0" // Only for Eclipse
+}
+
+group = 'com.samsung.sds.emarket'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// OpenAPI and Swagger UI
+    // compileOnly 'javax.validation:validation-api:1.1.0.Final'
+    compileOnly 'jakarta.validation:jakarta.validation-api:2.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    
+    // mapstruct
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    
+    // Database (JDBC & H2)
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtimeOnly 'com.h2database:h2:2.1.210'
+    
+    // Related to Mybatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+   	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2'
+   	
+   	// Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.keycloak:keycloak-spring-boot-starter:17.0.0'
+    
+    // Spring Actuator
+   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.4.0'
+
+	// Spring Boot Admin
+    implementation 'de.codecentric:spring-boot-admin-starter-client:2.4.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+openApiGenerate {    
+    generatorName = "spring"
+    inputSpec = "$rootDir/design/api-spec.yaml".toString()
+    outputDir = "$rootDir".toString() 
+    apiPackage = "com.samsung.sds.emarket.marketing.api"
+    invokerPackage = "com.samsung.sds.emarket.marketing.api.invoker"
+    modelPackage = "com.samsung.sds.emarket.marketing.api.model"
+    configOptions = [
+        dateLibrary: "java8",
+        java8: "false",
+        generateSupportingFiles: "false",
+        hideGenerationTimestamp: "true",
+        useTags: "true",
+        interfaceOnly: "true",
+        openApiNullable: "false"
+  ]
+}

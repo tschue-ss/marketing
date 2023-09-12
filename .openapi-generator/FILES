@@ -1,0 +1,6 @@
+README.md
+pom.xml
+src/main/java/com/samsung/sds/emarket/marketing/api/ApiUtil.java
+src/main/java/com/samsung/sds/emarket/marketing/api/CampaignsApi.java
+src/main/java/com/samsung/sds/emarket/marketing/api/model/CampaignDTO.java
+src/main/java/com/samsung/sds/emarket/marketing/api/model/NewCampaignDTO.java

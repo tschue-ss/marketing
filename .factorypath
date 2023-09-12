@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factorypath>
+	<factorypathentry kind="EXTJAR" id="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.projectlombok\lombok\1.18.22\9c08ea24c6eb714e2d6170e8122c069a0ba9aacf\lombok-1.18.22.jar" enabled="true" runInBatchMode="false"/>
+	<factorypathentry kind="EXTJAR" id="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.mapstruct\mapstruct-processor\1.4.2.Final\e55bd90d51cddd638c07d5bd89fc7535d4e3d069\mapstruct-processor-1.4.2.Final.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>
